@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CS2 &middot; Servers</title>
+<title>CS2 · Servers</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07090c;--card:rgba(19,23,28,.72);--line:rgba(255,255,255,.08);--txt:#e7ecf1;--mut:#7d8894;--acc:#ff8a1f;--acc2:#ffb347;--ok:#22c55e;--warn:#eab308;--bad:#ef4444}
+:root{--bg:#07090c;--card:rgba(19,23,28,.72);--line:rgba(255,255,255,.08);--txt:#e7ecf1;--mut:#7d8894;--acc:#ff8a1f;--acc2:#ffb347;--ok:#22c55e;--warn:#eab308;--bad:#ef4444;--blue:#3b82f6}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:Rajdhani,system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
@@ -50,7 +50,6 @@ label.tg .sw{width:36px;height:20px;border-radius:20px;background:#222931;positi
 label.tg .sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.3s cubic-bezier(.3,1.5,.5,1)}
 label.tg input:checked+.sw{background:var(--acc);box-shadow:0 0 12px rgba(255,138,31,.6)}
 label.tg input:checked+.sw::after{left:19px}
-.ref{display:flex;align-items:center;gap:10px}
 .ring{width:38px;height:38px;position:relative;cursor:pointer}
 .ring svg{transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:3}
@@ -70,6 +69,30 @@ label.tg input:checked+.sw::after{left:19px}
 .gh .line{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 .gh .cnt{color:var(--mut);font-size:14px;font-family:'JetBrains Mono',monospace}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+
+/* ===== Amigos ===== */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.fr{--sc:var(--mut);display:flex;align-items:center;gap:12px;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;padding:12px 14px;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .2s}
+.fr:hover{transform:translateY(-2px)}
+.anim .fr{animation:cardIn .6s cubic-bezier(.2,.9,.3,1.2) both}
+.fr.play{border-color:rgba(34,197,94,.45);box-shadow:0 0 35px -12px rgba(34,197,94,.7)}
+.fr.play::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(34,197,94,.12),transparent 70%);transform:translateX(-100%);animation:sweep 3s infinite}
+.fr.off{opacity:.5}
+.av{width:52px;height:52px;position:relative;flex-shrink:0}
+.av img{width:100%;height:100%;border-radius:12px;display:block;border:2px solid var(--sc);background:#1a1f25}
+.fr.play .av::after,.fr.cs .av::after{content:"";position:absolute;inset:-2px;border-radius:14px;border:2px solid var(--sc);animation:ringOut 1.8s infinite}
+@keyframes ringOut{to{transform:scale(1.3);opacity:0}}
+.fi{flex:1;min-width:0;position:relative}
+.fn{font-weight:700;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fn a{color:inherit;text-decoration:none}
+.fn a:hover{color:var(--acc)}
+.fs{font-size:14px;color:var(--sc);font-weight:600}
+.fm{font-size:12px;color:var(--mut);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.join{position:relative;flex-shrink:0;background:linear-gradient(135deg,var(--ok),#4ade80);color:#062;border:none;border-radius:10px;padding:9px 12px;font:700 14px Rajdhani;letter-spacing:1px;text-decoration:none;overflow:hidden;transition:.25s}
+.join:hover{box-shadow:0 0 20px rgba(34,197,94,.7);transform:translateY(-2px)}
+.fempty{color:var(--mut);font-size:14px}
+
+/* ===== Cards de servers ===== */
 .card{--mx:50%;--my:50%;--rx:0deg;--ry:0deg;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;padding:16px;position:relative;overflow:hidden;transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .15s ease-out,border-color .3s,box-shadow .3s}
 .anim .card{animation:cardIn .7s cubic-bezier(.2,.9,.3,1.2) both}
 @keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.9) rotateX(15deg)}}
@@ -77,6 +100,7 @@ label.tg input:checked+.sw::after{left:19px}
 .card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(300px circle at var(--mx) var(--my),color-mix(in srgb,var(--c) 25%,transparent),transparent 60%)}
 .card:hover{border-color:color-mix(in srgb,var(--c) 60%,transparent);box-shadow:0 20px 50px -15px color-mix(in srgb,var(--c) 50%,transparent)}
 .card:hover::after{opacity:1}
+.card.hasf{border-color:rgba(34,197,94,.5);box-shadow:0 0 30px -10px rgba(34,197,94,.6)}
 .card.full{opacity:.65;filter:saturate(.6)}
 .card.off{opacity:.45}
 .card>*{position:relative;z-index:1}
@@ -91,6 +115,10 @@ label.tg input:checked+.sw::after{left:19px}
 .dot.full{background:var(--warn)}
 @keyframes pulse{50%{opacity:.3}}
 .srv{color:var(--mut);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:12px;min-height:17px}
+.here{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ok);font-weight:700;margin-bottom:10px}
+.here .avs{display:flex}
+.here img{width:24px;height:24px;border-radius:50%;border:2px solid var(--ok);margin-left:-8px;background:#1a1f25}
+.here img:first-child{margin-left:0}
 .pl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
 .pl b{font-family:'JetBrains Mono',monospace;font-size:26px}
 .pl b i{font-style:normal;color:var(--mut);font-size:15px}
@@ -99,10 +127,10 @@ label.tg input:checked+.sw::after{left:19px}
 .meter div{height:100%;border-radius:8px;transition:width 1.2s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;box-shadow:0 0 10px currentColor}
 .meter div::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:shim 2s infinite}
 @keyframes shim{to{transform:translateX(100%)}}
-.map{font-size:13px;color:var(--mut);margin-bottom:12px;display:flex;justify-content:space-between}
+.map{font-size:13px;color:var(--mut);margin-bottom:12px}
 .map span{color:var(--txt);font-family:'JetBrains Mono',monospace}
 .ip{font-family:'JetBrains Mono',monospace;font-size:13px;background:rgba(0,0,0,.45);border:1px dashed var(--line);border-radius:9px;padding:8px 10px;margin-bottom:12px;color:#b9c3cd;cursor:pointer;transition:.25s;display:flex;justify-content:space-between}
-.ip::after{content:"\29C9";opacity:.4;transition:.25s}
+.ip::after{content:"⧉";opacity:.4;transition:.25s}
 .ip:hover{border-color:var(--acc);color:#fff;background:rgba(255,138,31,.08)}
 .ip:hover::after{opacity:1;color:var(--acc)}
 .btns{display:flex;gap:8px}
@@ -136,32 +164,38 @@ label.tg input:checked+.sw::after{left:19px}
     <div>
       <div class="live"><i></i>EN VIVO</div>
       <h1>CS2 <span>SERVERS</span></h1>
-      <div class="sub">Retakes &middot; Duels &middot; Deathmatch &mdash; conectate en un click</div>
+      <div class="sub">Retakes · Duels · Deathmatch — conectate en un click</div>
     </div>
     <div class="stats">
-      <div class="stat"><small>Jugando</small><b id="sP">&ndash;</b></div>
-      <div class="stat"><small>Libres</small><b id="sF">&ndash;</b></div>
-      <div class="stat"><small>Online</small><b id="sO">&ndash;</b></div>
+      <div class="stat"><small>Jugando</small><b id="sP">–</b></div>
+      <div class="stat"><small>Libres</small><b id="sF">–</b></div>
+      <div class="stat"><small>Online</small><b id="sO">–</b></div>
     </div>
   </header>
+
+  <div id="err"></div>
+  <section class="group" id="friends"></section>
+
   <div class="bar-top">
     <div id="chips"><div class="pill" id="pill"></div></div>
     <label class="tg"><input type="checkbox" id="hideFull"><span class="sw"></span>Ocultar llenos</label>
-    <label class="tg"><input type="checkbox" id="sortP"><span class="sw"></span>M&aacute;s jugadores</label>
+    <label class="tg"><input type="checkbox" id="sortP"><span class="sw"></span>Más jugadores</label>
     <div class="sp"></div>
-    <div class="ref">
-      <div class="ring" id="rb" title="Actualizar">
-        <svg width="38" height="38" viewBox="0 0 38 38"><circle class="tr" cx="19" cy="19" r="15.9"/><circle class="pr" id="prog" cx="19" cy="19" r="15.9" pathLength="100"/></svg>
-        <span id="cd">&#10227;</span>
-      </div>
+    <div class="ring" id="rb" title="Actualizar">
+      <svg width="38" height="38" viewBox="0 0 38 38"><circle class="tr" cx="19" cy="19" r="15.9"/><circle class="pr" id="prog" cx="19" cy="19" r="15.9" pathLength="100"/></svg>
+      <span id="cd">⟳</span>
     </div>
   </div>
-  <div id="err"></div>
+
   <main id="list"></main>
-  <p class="note">Datos oficiales de Steam &middot; <span id="upd">&ndash;</span> &middot; &ldquo;Conectar&rdquo; abre Steam y entra directo al server.</p>
+  <p class="note">Datos oficiales de Steam · <span id="upd">–</span> · “Conectar” abre Steam y entra directo al server.</p>
 </div>
 <div class="toast" id="toast"></div>
+
 <script>
+/* ⚠️ PEGÁ ACÁ LA URL DE TU CLOUDFLARE WORKER */
+const API='https://cs2-api.facundoscholze.workers.dev/';
+
 const GROUPS=[
  {k:'retakes',t:'Retakes',s:'MDQ',c:'#ff8a1f',l:[
   ['Retake 1','45.235.98.222:27017'],['Retake 2','45.235.98.222:27018'],['Retake 3','45.235.98.222:27019'],['Retake 4','45.235.98.222:27020'],
@@ -172,14 +206,15 @@ const GROUPS=[
  {k:'dm',t:'Deathmatch',s:'Crisis Gamer',c:'#ef4444',l:[['Crisis Gamer','45.235.98.246:27251']]}
 ];
 const FILTERS=[['all','Todos'],['retakes','Retakes'],['duels','Duels'],['dm','Deathmatch']];
-const REFRESH=60, DASH='\u2013';
-let updated=0;
-const ago=t=>{if(!t)return DASH;const m=Math.round((Date.now()-t)/60000);return m<1?'actualizado reci\u00e9n':`actualizado hace ${m} min`};
-let info={},filter='all',left=REFRESH,loading=false,loaded=false,prevStats={};
+const REFRESH=10;
+const STATES=['Offline','Online','Ocupado','Ausente','Durmiendo','Online','Online'];
+let info={},players=[],filter='all',left=REFRESH,loading=false,loaded=false,prevStats={},updated=0;
 const $=id=>document.getElementById(id);
-setInterval(()=>{if(updated)$('upd').textContent=ago(updated)},15000);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ago=t=>{if(!t)return'–';const s=Math.round((Date.now()-t)/1000);return s<10?'actualizado recién':s<60?`actualizado hace ${s}s`:`actualizado hace ${Math.round(s/60)} min`};
+setInterval(()=>{if(updated)$('upd').textContent=ago(updated)},5000);
 
-/* Particulas de fondo */
+/* Partículas */
 (()=>{const c=$('bg'),x=c.getContext('2d');let W,H,P=[];
  const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight};rs();addEventListener('resize',rs);
  for(let i=0;i<70;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.8+.4});
@@ -200,51 +235,81 @@ addEventListener('load',movePill);addEventListener('resize',movePill);setTimeout
 $('hideFull').onchange=()=>render(true);$('sortP').onchange=()=>render(true);
 $('rb').onclick=()=>load();
 
-/* Carga */
+/* Carga desde el Worker */
 async function load(){
- if(loading)return;loading=true;$('rb').classList.add('load');$('cd').textContent='\u27F3';
+ if(loading)return;
+ if(API.includes('TU-SUBDOMINIO')){$('err').innerHTML='<div class="err">Falta configurar la URL del Worker en <b>const API</b> dentro de index.html.</div>';return}
+ loading=true;$('rb').classList.add('load');$('cd').textContent='⟳';
  const first=!loaded;
  try{
-  const r=await fetch('servers.json?t='+Date.now());
+  const r=await fetch(API+'?t='+Date.now(),{cache:'no-store'});
   if(!r.ok)throw new Error('HTTP '+r.status);
-  const j=await r.json();info=j.servers||{};updated=j.updated;loaded=true;$('err').innerHTML='';
+  const j=await r.json();
+  info=j.servers||{};players=j.players||[];updated=j.updated||Date.now();loaded=true;$('err').innerHTML='';
   $('upd').textContent=ago(updated);
  }catch(e){
-  $('err').innerHTML=`<div class="err">Todav&iacute;a no hay datos (${e.message}). Esper&aacute; a que corra el workflow de GitHub Actions.</div>`;
+  $('err').innerHTML=`<div class="err">No se pudo conectar con el Worker (${esc(e.message)}).</div>`;
  }
  loading=false;left=REFRESH;$('rb').classList.remove('load');render(first);
 }
 
-/* Contador animado */
 function countTo(el,to){
- const from=parseInt(el.textContent)||0;
- const t0=performance.now(),dur=900;
+ const from=parseInt(el.textContent)||0,t0=performance.now(),dur=900;
  (function s(t){const k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(to-from)*e);if(k<1)requestAnimationFrame(s)})(t0);
  el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+}
+
+function findServer(addr){for(const g of GROUPS)for(const [n,a] of g.l)if(a===addr)return{name:n,g};return null}
+
+/* Estado de un amigo */
+function fstatus(p){
+ if(p.server){const s=findServer(p.server),d=info[p.server];
+  return{rank:0,cls:'play',col:'var(--ok)',txt:s?`Jugando en ${s.name}`:'Jugando en un server',
+   meta:d?`${d.map} · ${d.players}/${d.max}`:p.server,addr:p.server}}
+ if(p.inCS2)return{rank:1,cls:'cs',col:'var(--acc)',txt:'En CS2',meta:'Matchmaking o en el menú'};
+ if(p.state>0)return{rank:2,cls:'on',col:p.state===3||p.state===4?'var(--warn)':'var(--blue)',txt:STATES[p.state]||'Online',meta:p.game?`Jugando ${p.game}`:'En Steam'};
+ return{rank:3,cls:'off',col:'var(--mut)',txt:'Offline',meta:''};
+}
+
+function renderFriends(animate){
+ const F=$('friends');F.className='group'+(animate?' anim':'');
+ const list=players.map(p=>({p,s:fstatus(p)})).sort((a,b)=>a.s.rank-b.s.rank);
+ const playing=list.filter(x=>x.s.rank===0).length;
+ const body=!loaded?'<div class="fempty">Cargando amigos…</div>'
+  :!list.length?'<div class="fempty">No se pudieron cargar los perfiles (revisá que sean públicos).</div>'
+  :list.map(({p,s},i)=>`<div class="fr ${s.cls}" style="--sc:${s.col};animation-delay:${i*70}ms">
+    <div class="av"><img src="${esc(p.avatar)}" alt=""></div>
+    <div class="fi"><div class="fn"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a></div>
+     <div class="fs">${esc(s.txt)}</div>${s.meta?`<div class="fm">${esc(s.meta)}</div>`:''}</div>
+    ${s.addr?`<a class="join" href="steam://connect/${esc(s.addr)}">▶ UNIRSE</a>`:''}
+   </div>`).join('');
+ F.innerHTML=`<div class="gh"><h2>Amigos</h2><span class="tag" style="background:#22c55e22;color:var(--ok)">${playing} en server</span><div class="line"></div><span class="cnt">${list.filter(x=>x.s.rank<3).length}/${list.length} online</span></div><div class="fgrid">${body}</div>`;
 }
 
 function card(name,addr,c,i){
  const d=info[addr];let st='Cargando',dc='',pl=null,mx=null,free=null,pct=0,cls='';
  if(loaded&&!d){st='Offline';dc='bad';cls='off'}
- if(d){const b=d.bots||0;pl=d.players;mx=d.max;free=Math.max(mx-pl-b,0);pct=mx?(pl+b)/mx*100:0;
+ if(d){pl=d.players;mx=d.max;free=Math.max(mx-pl,0);pct=mx?pl/mx*100:0;
   if(free===0){st='Lleno';dc='full';cls='full'}else{st='Online';dc='ok'}}
+ const fr=players.filter(p=>p.server===addr);if(fr.length)cls+=' hasf';
  const col=pct>=100?'var(--bad)':pct>=70?'var(--warn)':'var(--ok)';
  const sk=!loaded?' sk':'';
  return `<div class="card ${cls}" style="--c:${c};animation-delay:${i*60}ms">
   <div class="top"><div class="nm">${name}</div><div class="st"><span class="dot ${dc}"></span>${st}</div></div>
-  <div class="srv${sk}" title="${d?.name||''}">${d?.name||'&nbsp;'}</div>
-  <div class="pl"><b class="${sk}">${pl??DASH}<i>/${mx??DASH}</i></b><span class="free" style="color:${free===0?'var(--bad)':'var(--ok)'}">${free!=null?(free===0?'Sin lugar':free+' libre'+(free>1?'s':'')):''}</span></div>
+  <div class="srv${sk}" title="${esc(d?.name)}">${d?esc(d.name):'&nbsp;'}</div>
+  ${fr.length?`<div class="here"><div class="avs">${fr.map(p=>`<img src="${esc(p.avatar)}" title="${esc(p.name)}">`).join('')}</div>${fr.length===1?esc(fr[0].name)+' está acá':fr.length+' amigos acá'}</div>`:''}
+  <div class="pl"><b class="${sk}">${pl??'–'}<i>/${mx??'–'}</i></b><span class="free" style="color:${free===0?'var(--bad)':'var(--ok)'}">${free!=null?(free===0?'Sin lugar':free+' libre'+(free>1?'s':'')):''}</span></div>
   <div class="meter"><div data-w="${Math.min(pct,100)}" style="width:0;background:${col};color:${col}"></div></div>
-  <div class="map"><div>Mapa: <span>${d?.map||DASH}</span></div><div>${d?.bots?`\u{1F916} ${d.bots} bots`:''}</div></div>
+  <div class="map">Mapa: <span>${esc(d?.map)||'–'}</span></div>
   <div class="ip" data-cp="connect ${addr}" title="Click para copiar">connect ${addr}</div>
-  <div class="btns"><a class="go" href="steam://connect/${addr}">&#9654; CONECTAR</a><button class="cp" data-cp="connect ${addr}">COPIAR</button></div>
+  <div class="btns"><a class="go" href="steam://connect/${addr}">▶ CONECTAR</a><button class="cp" data-cp="connect ${addr}">COPIAR</button></div>
  </div>`;
 }
 
 function render(animate){
+ renderFriends(animate);
  let tp=0,tf=0,on=0,tot=0;
- GROUPS.forEach(g=>g.l.forEach(([,a])=>{tot++;const d=info[a];
-  if(d){on++;tp+=d.players;tf+=Math.max(d.max-d.players-(d.bots||0),0)}}));
+ GROUPS.forEach(g=>g.l.forEach(([,a])=>{tot++;const d=info[a];if(d){on++;tp+=d.players;tf+=Math.max(d.max-d.players,0)}}));
  if(loaded){
   if(prevStats.p!==tp)countTo($('sP'),tp);
   if(prevStats.f!==tf)countTo($('sF'),tf);
@@ -256,16 +321,16 @@ function render(animate){
  L.innerHTML=GROUPS.filter(g=>filter==='all'||g.k===filter).map(g=>{
   let l=[...g.l];
   if(so)l.sort((x,y)=>(info[y[1]]?.players??-1)-(info[x[1]]?.players??-1));
-  if(hf)l=l.filter(([,a])=>{const d=info[a];return !(d&&d.max-d.players-(d.bots||0)<=0)});
+  if(hf)l=l.filter(([,a])=>{const d=info[a];return !(d&&d.max-d.players<=0)});
   const gp=g.l.reduce((s,[,a])=>s+(info[a]?.players||0),0);
   return `<section class="group"><div class="gh"><h2>${g.t}</h2>
    <span class="tag" style="background:${g.c}22;color:${g.c}">${g.s}</span><div class="line"></div>
    <span class="cnt">${gp} jugando</span></div>
-   <div class="grid">${l.map(([n,a])=>card(n,a,g.c,idx++)).join('')||'<div class="map">Todos llenos \u{1F605}</div>'}</div></section>`}).join('');
+   <div class="grid">${l.map(([n,a])=>card(n,a,g.c,idx++)).join('')||'<div class="map">Todos llenos 😅</div>'}</div></section>`}).join('');
  requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('.meter div').forEach(m=>m.style.width=m.dataset.w+'%')));
 }
 
-/* Tilt 3D + luz */
+/* Tilt 3D */
 document.addEventListener('mousemove',e=>{
  const c=e.target.closest('.card');if(!c)return;const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
  c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');
@@ -275,13 +340,13 @@ document.addEventListener('mouseout',e=>{const c=e.target.closest('.card');if(c&
 
 /* Ripple + copiar */
 document.addEventListener('click',async e=>{
- const btn=e.target.closest('.btns a,.btns button');
+ const btn=e.target.closest('.btns a,.btns button,.join');
  if(btn){const r=btn.getBoundingClientRect(),s=Math.max(r.width,r.height),sp=document.createElement('span');
   sp.className='ripple';sp.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;
   btn.appendChild(sp);setTimeout(()=>sp.remove(),600)}
  const el=e.target.closest('[data-cp]');if(!el)return;const t=el.dataset.cp;
  try{await navigator.clipboard.writeText(t)}catch{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
- const ts=$('toast');ts.textContent='\u2713 Copiado: '+t;ts.classList.add('show');clearTimeout(ts._t);ts._t=setTimeout(()=>ts.classList.remove('show'),1800);
+ const ts=$('toast');ts.textContent='✓ Copiado: '+t;ts.classList.add('show');clearTimeout(ts._t);ts._t=setTimeout(()=>ts.classList.remove('show'),1800);
 });
 
 /* Cuenta regresiva */
