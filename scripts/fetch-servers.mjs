@@ -14,8 +14,8 @@ for (const ip of IPS) {
     for (const s of j.response?.servers || []) {
       servers[`${ip}:${s.gameport}`] = {
         name: s.name, map: s.map,
-        players: Math.max(s.players - (s.bots || 0), 0),
-        max: s.max_players, bots: s.bots || 0
+        players: s.players,
+        max: s.max_players, bots: 0
       };
     }
   } catch (e) { console.warn('Error con', ip, e.message); }
